@@ -57,6 +57,11 @@ public class SnakeScript : MonoBehaviour
             transform.eulerAngles = new Vector3 (0, 0,-90);
          }
       }
+
+      if (Input.GetKeyDown(KeyCode.Escape))
+      {
+         Application.Quit();
+      }
    }
 
    private void FixedUpdate()

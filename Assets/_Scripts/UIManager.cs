@@ -21,4 +21,9 @@ public class UIManager : MonoBehaviour
         startUI.SetActive(false);
         Time.timeScale = 1f;
     }
+
+    public void Button_Quit()
+    {
+        Application.Quit();
+    }
 }
