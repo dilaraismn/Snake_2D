@@ -22,4 +22,9 @@ public class AppleScript : MonoBehaviour
 
         this.transform.position = new Vector3(Mathf.Round(x), Mathf.Round(y), 0);
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        RandomizePosition();
+    }
 }
