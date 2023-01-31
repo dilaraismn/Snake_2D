@@ -328,6 +328,8 @@ MonoBehaviour:
   sfx_Movement: {fileID: 8300000, guid: d7139c5f49c6a8a4bb561e505488c000, type: 3}
   sfx_Apple: {fileID: 8300000, guid: 7a449c064002df44cbe294f20338bc80, type: 3}
   sfx_Hit: {fileID: 8300000, guid: 3d33543f8348c7d48a4079d4716f19d1, type: 3}
+  text_appleCount: {fileID: 207444556}
+  text_highScore: {fileID: 910073841}
 --- !u!82 &116853692
 AudioSource:
   m_ObjectHideFlags: 0
@@ -589,8 +591,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 252, y: 11.300004}
-  m_SizeDelta: {x: 200, y: 100}
+  m_AnchoredPosition: {x: 296, y: 10}
+  m_SizeDelta: {x: 150, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &207444556
 MonoBehaviour:
@@ -612,7 +614,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1234
+  m_text: 4
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e4ae4862c6d89bf4f9584a3d7d268ae4, type: 2}
   m_sharedMaterial: {fileID: -3923094649436891418, guid: e4ae4862c6d89bf4f9584a3d7d268ae4, type: 2}
@@ -1125,7 +1127,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 466, y: 14}
+  m_AnchoredPosition: {x: 427, y: 12.700008}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &767988617
@@ -1215,8 +1217,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 611, y: 11.300004}
-  m_SizeDelta: {x: 200, y: 100}
+  m_AnchoredPosition: {x: 555, y: 10.000012}
+  m_SizeDelta: {x: 150, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &910073841
 MonoBehaviour:
@@ -1238,7 +1240,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1234
+  m_text: '4
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e4ae4862c6d89bf4f9584a3d7d268ae4, type: 2}
   m_sharedMaterial: {fileID: -3923094649436891418, guid: e4ae4862c6d89bf4f9584a3d7d268ae4, type: 2}
@@ -1349,7 +1353,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 110, y: 17.000004}
+  m_AnchoredPosition: {x: 168.99994, y: 15.700012}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &930287938

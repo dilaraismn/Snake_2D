@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class SnakeScript : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class SnakeScript : MonoBehaviour
    public Transform segmentPrefab;
    private AudioSource _audioSource;
    public AudioClip sfx_Movement, sfx_Apple, sfx_Hit;
+   private int appleCount, highScore;
+   public TMP_Text text_appleCount, text_highScore;
+   
 
    private void Start()
    {
@@ -20,6 +24,7 @@ public class SnakeScript : MonoBehaviour
 
    private void Update()
    {
+      text_appleCount.text = appleCount.ToString();
       if (_direction.x != 0f)
       {
          if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) 
@@ -71,6 +76,7 @@ public class SnakeScript : MonoBehaviour
       if (other.CompareTag("Apple"))
       {
          _audioSource.PlayOneShot(sfx_Apple);
+         appleCount += 1;
          Grow();
       }
 
@@ -78,6 +84,14 @@ public class SnakeScript : MonoBehaviour
       {
          _audioSource.Stop();
          _audioSource.PlayOneShot(sfx_Hit);
+         
+         if (appleCount > PlayerPrefs.GetInt("HighScore"))
+         {
+            highScore = appleCount;
+            PlayerPrefs.SetInt ("HighScore", highScore);
+            PlayerPrefs.Save();
+         }
+
          ResetSnake();
       }
    }
@@ -91,6 +105,8 @@ public class SnakeScript : MonoBehaviour
 
    private void ResetSnake()
    {
+      text_highScore.text = PlayerPrefs.GetInt("HighScore").ToString();
+      appleCount = 0;
       _direction = Vector2.right;
       transform.position = Vector3.zero;
       transform.eulerAngles = new Vector3 (0, 0,90);
@@ -104,5 +120,4 @@ public class SnakeScript : MonoBehaviour
       _segments.Add(this.transform);
       _audioSource.Play();
    }
-   
 }
