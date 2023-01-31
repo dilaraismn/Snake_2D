@@ -6,18 +6,41 @@ using UnityEngine;
 public class SnakeScript : MonoBehaviour
 {
    private Vector2 _direction = Vector2.right;
-   private List<Transform> _segments;
+   private List<Transform> _segments = new List<Transform>();
    public Transform segmentPrefab;
 
    private void Start()
    {
-      _segments = new List<Transform>();
-      _segments.Add(this.transform);
+      ResetSnake();
    }
 
    private void Update()
    {
-      if (Input.GetKeyDown(KeyCode.W))
+      if (_direction.x != 0f)
+      {
+         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) 
+         {
+            _direction = Vector2.up;
+         } 
+         else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) 
+         {
+            _direction = Vector2.down;
+         }
+      }
+
+      else if (_direction.y != 0f)
+      {
+         if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) 
+         {
+            _direction = Vector2.right;
+         } 
+         else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)) 
+         {
+            _direction = Vector2.left;
+         }
+      }
+      
+    /*if (Input.GetKeyDown(KeyCode.W))
       {
          _direction = Vector2.up;
       }
@@ -32,7 +55,7 @@ public class SnakeScript : MonoBehaviour
       else if (Input.GetKeyDown(KeyCode.D))
       {
          _direction = Vector2.right;
-      }
+      }*/
    }
 
    private void FixedUpdate()
@@ -42,10 +65,10 @@ public class SnakeScript : MonoBehaviour
          _segments[i].position = _segments[i - 1].position;
       } 
       
-      this.transform.position = new Vector3(
-         Mathf.Round(this.transform.position.x) + _direction.x,
-         Mathf.Round(this.transform.position.y) + _direction.y,
-         0);
+      float x = Mathf.Round(transform.position.x) + _direction.x;
+      float y = Mathf.Round(transform.position.y) + _direction.y;
+
+      transform.position = new Vector2(x, y);
    }
    
    private void OnTriggerEnter2D(Collider2D other)
@@ -57,7 +80,7 @@ public class SnakeScript : MonoBehaviour
 
       if (other.CompareTag("Obstacle"))
       {
-         Fail();
+         ResetSnake();
       }
    }
    
@@ -68,8 +91,11 @@ public class SnakeScript : MonoBehaviour
       _segments.Add(segment);
    }
 
-   private void Fail()
+   private void ResetSnake()
    {
+      _direction = Vector2.right;
+      transform.position = Vector3.zero;
+      
       for (int i = 1; i < _segments.Count; i++)
       {
          Destroy(_segments[i].gameObject);
@@ -78,7 +104,6 @@ public class SnakeScript : MonoBehaviour
       _segments.Clear();
       _segments.Add(this.transform);
       
-      this.transform.position = Vector3.zero;
    }
    
 }

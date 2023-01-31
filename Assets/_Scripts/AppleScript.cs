@@ -19,15 +19,15 @@ public class AppleScript : MonoBehaviour
 
         float x = Random.Range(bounds.min.x, bounds.max.x);
         float y = Random.Range(bounds.min.y, bounds.max.y);
+        
+        x = Mathf.Round(x);
+        y = Mathf.Round(y);
 
-        this.transform.position = new Vector3(Mathf.Round(x), Mathf.Round(y), 0);
+        transform.position = new Vector2(x, y);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Snake"))
-        {
-            RandomizePosition();
-        }
+       RandomizePosition();
     }
 }
