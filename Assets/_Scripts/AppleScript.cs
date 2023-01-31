@@ -10,6 +10,11 @@ public class AppleScript : MonoBehaviour
 
     private void Start()
     {
+        if (!UIManager.isGameStarted)
+        {
+            return;
+        }
+        
         RandomizePosition();
     }
 

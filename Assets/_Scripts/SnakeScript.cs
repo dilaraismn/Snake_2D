@@ -13,6 +13,7 @@ public class SnakeScript : MonoBehaviour
    public AudioClip sfx_Movement, sfx_Apple, sfx_Hit;
    private int appleCount, highScore;
    public TMP_Text text_appleCount, text_highScore;
+   public GameObject startUI;
    
 
    private void Start()
@@ -60,15 +61,18 @@ public class SnakeScript : MonoBehaviour
 
    private void FixedUpdate()
    {
-      for (int i = _segments.Count -1; i > 0; i--)
+      if (UIManager.isGameStarted)
       {
-         _segments[i].position = _segments[i - 1].position;
-      } 
+         for (int i = _segments.Count -1; i > 0; i--)
+         {
+            _segments[i].position = _segments[i - 1].position;
+         } 
       
-      float x = Mathf.Round(transform.position.x) + _direction.x;
-      float y = Mathf.Round(transform.position.y) + _direction.y;
+         float x = Mathf.Round(transform.position.x) + _direction.x;
+         float y = Mathf.Round(transform.position.y) + _direction.y;
 
-      transform.position = new Vector2(x, y);
+         transform.position = new Vector2(x, y);
+      }
    }
    
    private void OnTriggerEnter2D(Collider2D other)
@@ -82,8 +86,10 @@ public class SnakeScript : MonoBehaviour
 
       if (other.CompareTag("Obstacle"))
       {
-         _audioSource.Stop();
          _audioSource.PlayOneShot(sfx_Hit);
+         _audioSource.Stop();
+         Time.timeScale = 0f;
+         startUI.SetActive(true);
          
          if (appleCount > PlayerPrefs.GetInt("HighScore"))
          {
