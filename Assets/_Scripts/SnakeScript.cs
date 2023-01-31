@@ -47,13 +47,6 @@ public class SnakeScript : MonoBehaviour
          Mathf.Round(this.transform.position.y) + _direction.y,
          0);
    }
-
-   private void Grow()
-   {
-      Transform segment = Instantiate(segmentPrefab, transform.parent);
-      segment.position = _segments[_segments.Count - 1].position;
-      _segments.Add(segment);
-   }
    
    private void OnTriggerEnter2D(Collider2D other)
    {
@@ -61,6 +54,31 @@ public class SnakeScript : MonoBehaviour
       {
          Grow();
       }
+
+      if (other.CompareTag("Obstacle"))
+      {
+         Fail();
+      }
+   }
+   
+   private void Grow()
+   {
+      Transform segment = Instantiate(segmentPrefab, transform.parent);
+      segment.position = _segments[_segments.Count - 1].position;
+      _segments.Add(segment);
+   }
+
+   private void Fail()
+   {
+      for (int i = 1; i < _segments.Count; i++)
+      {
+         Destroy(_segments[i].gameObject);
+      }
+      
+      _segments.Clear();
+      _segments.Add(this.transform);
+      
+      this.transform.position = Vector3.zero;
    }
    
 }
