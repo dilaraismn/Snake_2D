@@ -26,11 +26,13 @@ public class SnakeScript : MonoBehaviour
          {
             _direction = Vector2.up;
             _audioSource.PlayOneShot(sfx_Movement);
+            transform.eulerAngles = new Vector3 (0, 0, 180);
          } 
          else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) 
          {
             _direction = Vector2.down;
             _audioSource.PlayOneShot(sfx_Movement);
+            transform.eulerAngles = new Vector3 (0, 0,0);
          }
       }
 
@@ -40,11 +42,13 @@ public class SnakeScript : MonoBehaviour
          {
             _direction = Vector2.right;
             _audioSource.PlayOneShot(sfx_Movement);
+            transform.eulerAngles = new Vector3 (0, 0,90);
          } 
          else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)) 
          {
             _direction = Vector2.left;
             _audioSource.PlayOneShot(sfx_Movement);
+            transform.eulerAngles = new Vector3 (0, 0,-90);
          }
       }
    }
@@ -89,7 +93,8 @@ public class SnakeScript : MonoBehaviour
    {
       _direction = Vector2.right;
       transform.position = Vector3.zero;
-      
+      transform.eulerAngles = new Vector3 (0, 0,90);
+
       for (int i = 1; i < _segments.Count; i++)
       {
          Destroy(_segments[i].gameObject);
