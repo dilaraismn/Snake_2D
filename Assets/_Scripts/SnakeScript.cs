@@ -8,9 +8,13 @@ public class SnakeScript : MonoBehaviour
    private Vector2 _direction = Vector2.right;
    private List<Transform> _segments = new List<Transform>();
    public Transform segmentPrefab;
+   private AudioSource _audioSource;
+   public AudioClip sfx_Movement, sfx_Apple, sfx_Hit;
 
    private void Start()
    {
+      _audioSource = GetComponent<AudioSource>();
+      _audioSource.Play(); //game music
       ResetSnake();
    }
 
@@ -21,10 +25,12 @@ public class SnakeScript : MonoBehaviour
          if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) 
          {
             _direction = Vector2.up;
+            _audioSource.PlayOneShot(sfx_Movement);
          } 
          else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) 
          {
             _direction = Vector2.down;
+            _audioSource.PlayOneShot(sfx_Movement);
          }
       }
 
@@ -33,29 +39,14 @@ public class SnakeScript : MonoBehaviour
          if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) 
          {
             _direction = Vector2.right;
+            _audioSource.PlayOneShot(sfx_Movement);
          } 
          else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)) 
          {
             _direction = Vector2.left;
+            _audioSource.PlayOneShot(sfx_Movement);
          }
       }
-      
-    /*if (Input.GetKeyDown(KeyCode.W))
-      {
-         _direction = Vector2.up;
-      }
-      else if (Input.GetKeyDown(KeyCode.S))
-      {
-         _direction = Vector2.down;
-      }
-      else if (Input.GetKeyDown(KeyCode.A))
-      {
-         _direction = Vector2.left;
-      }
-      else if (Input.GetKeyDown(KeyCode.D))
-      {
-         _direction = Vector2.right;
-      }*/
    }
 
    private void FixedUpdate()
@@ -75,11 +66,14 @@ public class SnakeScript : MonoBehaviour
    {
       if (other.CompareTag("Apple"))
       {
+         _audioSource.PlayOneShot(sfx_Apple);
          Grow();
       }
 
       if (other.CompareTag("Obstacle"))
       {
+         _audioSource.Stop();
+         _audioSource.PlayOneShot(sfx_Hit);
          ResetSnake();
       }
    }
@@ -103,7 +97,7 @@ public class SnakeScript : MonoBehaviour
       
       _segments.Clear();
       _segments.Add(this.transform);
-      
+      _audioSource.Play();
    }
    
 }
