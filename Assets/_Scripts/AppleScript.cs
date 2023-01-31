@@ -25,6 +25,9 @@ public class AppleScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        RandomizePosition();
+        if (other.CompareTag("Snake"))
+        {
+            RandomizePosition();
+        }
     }
 }
