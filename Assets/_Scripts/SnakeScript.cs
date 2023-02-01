@@ -7,7 +7,7 @@ using TMPro;
 public class SnakeScript : MonoBehaviour
 {
    private Vector2 _direction = Vector2.right;
-   private List<Transform> _segments = new List<Transform>();
+   public static List<Transform> _segments = new List<Transform>();
    public Transform segmentPrefab;
    private AudioSource _audioSource;
    public AudioClip sfx_Movement, sfx_Apple, sfx_Hit;

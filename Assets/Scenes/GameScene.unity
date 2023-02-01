@@ -569,6 +569,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameAreaCollider: {fileID: 12815949}
+  snake: {fileID: 116853685}
 --- !u!114 &189227049
 MonoBehaviour:
   m_ObjectHideFlags: 0
