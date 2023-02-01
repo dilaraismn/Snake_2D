@@ -25,7 +25,10 @@ public class SnakeScript : MonoBehaviour
 
    private void Update()
    {
+      if (!UIManager.isGameStarted) return;
+
       text_appleCount.text = appleCount.ToString();
+      
       if (_direction.x != 0f)
       {
          if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) 
