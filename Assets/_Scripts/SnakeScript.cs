@@ -118,6 +118,31 @@ public class SnakeScript : MonoBehaviour
 
          ResetSnake();
       }
+
+      if (other.CompareTag("RightWall"))
+      {
+         //goes to right
+         transform.position = new Vector3(-26, transform.position.y,0);
+         transform.eulerAngles = new Vector3 (0, 0,90);
+      }
+
+      if (other.CompareTag("LeftWall"))
+      {
+         transform.position = new Vector3(26, transform.position.y, 0);
+         transform.eulerAngles = new Vector3 (0, 0,-90);
+      }
+
+      if (other.CompareTag("UpWall"))
+      {
+         transform.position = new Vector3(transform.position.x, -15, 0);
+         transform.eulerAngles = new Vector3 (0, 0, 180);
+      }
+
+      if (other.CompareTag("DownWall"))
+      {
+         transform.position = new Vector3(transform.position.x, 15, 0);
+         transform.eulerAngles = new Vector3 (0, 0,0);
+      }
    }
    
    private void Grow()
