@@ -6,7 +6,7 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
     public GameObject startUI;
-    public static bool isGameStarted;
+    public static bool isGameStarted, isMute;
 
     private void Start()
     {
@@ -25,5 +25,10 @@ public class UIManager : MonoBehaviour
     public void Button_Quit()
     {
         Application.Quit();
+    }
+
+    public void Button_Mute()
+    {
+        isMute = !isMute;
     }
 }

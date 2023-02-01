@@ -13,8 +13,7 @@ public class SnakeScript : MonoBehaviour
    public AudioClip sfx_Movement, sfx_Apple, sfx_Hit;
    private int appleCount, highScore;
    public TMP_Text text_appleCount, text_highScore;
-   public GameObject startUI;
-   
+   public GameObject startUI, muteImage;
 
    private void Start()
    {
@@ -25,10 +24,21 @@ public class SnakeScript : MonoBehaviour
 
    private void Update()
    {
+      if (UIManager.isMute)
+      {
+         _audioSource.mute = true;
+         muteImage.SetActive(true);
+      }
+      else
+      {
+         _audioSource.mute = false;
+         muteImage.SetActive(false);
+      }
+      
+      text_appleCount.text = appleCount.ToString();
+
       if (!UIManager.isGameStarted) return;
 
-      text_appleCount.text = appleCount.ToString();
-      
       if (_direction.x != 0f)
       {
          if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) 
