@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class SnakeScript : MonoBehaviour
@@ -14,7 +15,7 @@ public class SnakeScript : MonoBehaviour
    private int appleCount, highScore;
    public TMP_Text text_appleCount, text_highScore;
    public GameObject startUI, muteImage;
-
+   
    private void Start()
    {
       _audioSource = GetComponent<AudioSource>();
@@ -108,14 +109,14 @@ public class SnakeScript : MonoBehaviour
          _audioSource.Stop();
          Time.timeScale = 0f;
          startUI.SetActive(true);
-         
+
          if (appleCount > PlayerPrefs.GetInt("HighScore"))
          {
             highScore = appleCount;
             PlayerPrefs.SetInt ("HighScore", highScore);
             PlayerPrefs.Save();
          }
-
+         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
          ResetSnake();
       }
 

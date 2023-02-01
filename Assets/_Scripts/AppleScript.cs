@@ -61,11 +61,9 @@ public class AppleScript : MonoBehaviour
 
             if (Vector3.Distance(applePos, apple.transform.position) < minAppleDistance)
             {
-                print("apples are too close");
                 return true;
             }
         }
-        print("okay");
         return false;
     }
     
@@ -74,11 +72,6 @@ public class AppleScript : MonoBehaviour
         if (other.CompareTag("Snake"))
         {
             RandomizePosition();
-        }
-
-        if (other.CompareTag("Obstacle"))
-        {
-            print("obstacle");
         }
     }
 }
