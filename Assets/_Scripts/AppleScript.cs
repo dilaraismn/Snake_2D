@@ -20,7 +20,7 @@ public class AppleScript : MonoBehaviour
         RandomizePosition();
     }
 
-    private void RandomizePosition()
+    public void RandomizePosition()
     {
         while (Vector2.Distance(this.transform.position, snake.transform.position) < minDistance || 
                IsTooCloseToTail(this.transform.position))
