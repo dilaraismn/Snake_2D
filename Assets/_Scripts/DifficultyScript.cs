@@ -20,7 +20,6 @@ public class DifficultyScript : MonoBehaviour
     {
         Timer();
         DifficultyManagement();
-        print(seconds);
     }
     
     void Timer()
@@ -33,17 +32,21 @@ public class DifficultyScript : MonoBehaviour
     
     private void DifficultyManagement()
     {
-        if (seconds > 9 && ((seconds % 10) == 0))
+        if (seconds > 9 && ((seconds % 10) == 0) && spawnedAppleCount < 5)
         {
-            for (spawnedAppleCount = 1; spawnedAppleCount < 5; spawnedAppleCount++)
+            if (!isCreated)
             {
-                if (!isCreated)
-                {
-                    Instantiate(apple, activeApple.transform.parent);
-                    isCreated = true;
-                }
-                
+                Instantiate(apple, activeApple.transform.parent);
+                spawnedAppleCount++;
+                isCreated = true;
+                StartCoroutine(AppleSpawnReset());
             }
         }
+    }
+
+    IEnumerator AppleSpawnReset()
+    {
+        yield return new WaitForSeconds(5);
+        isCreated = false;
     }
 }
