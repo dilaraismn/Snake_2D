@@ -14,9 +14,10 @@ public class SnakeScript : MonoBehaviour
    public AudioClip sfx_Movement, sfx_Apple, sfx_Hit;
    private int appleCount, highScore;
    public TMP_Text text_appleCount, text_highScore;
-   public GameObject startUI, muteImage;
+   public GameObject startUI, muteImage, pauseUI;
    private string currentScene;
    [SerializeField] private string sceneName, key;
+   public static bool isGamePaused;
    
    private void Start()
    {
@@ -95,7 +96,18 @@ public class SnakeScript : MonoBehaviour
 
       if (Input.GetKeyDown(KeyCode.Escape))
       {
-         Application.Quit();
+         isGamePaused = !isGamePaused;
+      }
+
+      if (isGamePaused)
+      {
+         pauseUI.SetActive(true);
+         Time.timeScale = 0f;
+      }
+      else
+      {
+         pauseUI.SetActive(false);
+         Time.timeScale = 1;
       }
    }
 
