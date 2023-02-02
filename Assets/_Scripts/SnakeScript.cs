@@ -15,14 +15,35 @@ public class SnakeScript : MonoBehaviour
    private int appleCount, highScore;
    public TMP_Text text_appleCount, text_highScore;
    public GameObject startUI, muteImage;
+   private string currentScene;
+   [SerializeField] private string sceneName, key;
    
    private void Start()
    {
+      currentScene = SceneManager.GetActiveScene().name;
       _audioSource = GetComponent<AudioSource>();
       _audioSource.Play(); //game music
       ResetSnake();
    }
 
+   private void SetPlayPrefs(string sceneName, string key, int value)
+   {
+      if (currentScene == sceneName)
+      {
+         PlayerPrefs.SetInt(key, value);
+      }
+   }
+   
+   private void GetPlayPrefs(string sceneName, string key, int value)
+   {
+      string currentScene = SceneManager.GetActiveScene().name;
+      
+      if (currentScene == sceneName)
+      {
+         PlayerPrefs.SetInt(key, value);
+      }
+   }
+   
    private void Update()
    {
       if (UIManager.isMute)
@@ -110,19 +131,20 @@ public class SnakeScript : MonoBehaviour
          Time.timeScale = 0f;
          startUI.SetActive(true);
 
-         if (appleCount > PlayerPrefs.GetInt("HighScore"))
+         if (appleCount > PlayerPrefs.GetInt(key))
          {
             highScore = appleCount;
-            PlayerPrefs.SetInt ("HighScore", highScore);
+            SetPlayPrefs(sceneName, key, highScore);
             PlayerPrefs.Save();
          }
          SceneManager.LoadScene(SceneManager.GetActiveScene().name);
          ResetSnake();
       }
 
+      #region WallTransition
+      
       if (other.CompareTag("RightWall"))
       {
-         //goes to right
          transform.position = new Vector3(-26, transform.position.y,0);
          transform.eulerAngles = new Vector3 (0, 0,90);
       }
@@ -144,6 +166,8 @@ public class SnakeScript : MonoBehaviour
          transform.position = new Vector3(transform.position.x, 15, 0);
          transform.eulerAngles = new Vector3 (0, 0,0);
       }
+      #endregion
+
    }
    
    private void Grow()
@@ -155,7 +179,7 @@ public class SnakeScript : MonoBehaviour
 
    private void ResetSnake()
    {
-      text_highScore.text = PlayerPrefs.GetInt("HighScore").ToString();
+      text_highScore.text = PlayerPrefs.GetInt(key).ToString();
       appleCount = 0;
       _direction = Vector2.right;
       transform.position = Vector3.zero;

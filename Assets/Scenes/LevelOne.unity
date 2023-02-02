@@ -381,6 +381,8 @@ MonoBehaviour:
   text_highScore: {fileID: 910073841}
   startUI: {fileID: 538406323}
   muteImage: {fileID: 130865977}
+  sceneName: LevelOne
+  key: HighScoreOne
 --- !u!82 &116853692
 AudioSource:
   m_ObjectHideFlags: 0
